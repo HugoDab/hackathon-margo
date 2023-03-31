@@ -1,7 +1,10 @@
 import express from "express";
+import {waterRouter} from "./water";
+import {directionsRouter} from "./directions";
 
-const router = express.Router()
+const router = express.Router();
 
-router.use()
+router.use(waterRouter);
+router.use(directionsRouter);
 
-module.exports = router
+export {router}

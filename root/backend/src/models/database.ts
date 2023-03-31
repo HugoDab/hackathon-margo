@@ -1,36 +1,49 @@
 import fs from "fs";
-import { parse } from 'csv-parse';
+import {CsvError, parse} from 'csv-parse';
+import {AcceptationType, DrinkingWater} from "../utils/types";
+import dotenv from "dotenv";
 
+dotenv.config()
 
-const csvFilePath = process.env.DATABASE_FILE;
+const csvFilePath: string = process.env.DATABASE_FILE?? "data.csv";
 
-type DrinkingWater = {
-    x: string;
-    y: string;
-    osm_id: string;
-    operator: string;
-    accepts_bottle: string;
-    indoor: string;
-    offers_cold_water: string;
-    offers_warm_water: string;
-    offers_hot_water: string;
-    fee: string;
-    description: string;
-};
-
-const headers = ["X", "Y", "osm_id", "name", "operator", "accepts_bottle", "indoor", "offers_cold_water", "offers_warm_water", "offers_hot_water", "fee", "description"];
+const headers = ["long", "lat", "osm_id", "name", "operator", "accepts_bottle", "indoor", "offers_cold_water", "offers_warm_water", "offers_hot_water", "fee", "description", "com_insee", "com_nom"];
 
 const fileContent = fs.readFileSync(csvFilePath, {encoding: 'utf-8'});
-
-
+let drinkingWaterArray: Array<DrinkingWater>;
 
 parse(fileContent, {
-    delimiter: ',',
+    delimiter: ';',
     columns: headers,
-}, (error, result: DrinkingWater[]) => {
+    cast: (columnValue, context) => {
+        switch (context.column) {
+            case 'lat':
+            case 'long':
+            case "com_insee":
+                return Number(columnValue);
+            case "accepts_bottle":
+            case "indoor":
+            case "offers_cold_water":
+            case "offers_warm_water":
+            case "offers_hot_water":
+            case "fee":
+                switch (columnValue) {
+                    case "yes":
+                        return AcceptationType.yes;
+                    case "no":
+                        return AcceptationType.no;
+                    default:
+                        return AcceptationType.unknown;
+                }
+            default:
+                return columnValue;
+        }
+}
+}, (error:CsvError | undefined, result: DrinkingWater[]) => {
     if (error) {
         console.error(error);
     }
-    console.log("Result", result);
+    drinkingWaterArray = result.slice(1);
 });
-export {sequelize}
+
+export {drinkingWaterArray}
