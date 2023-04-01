@@ -1,12 +1,14 @@
 import { PictureOutlined, UserOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import {Breadcrumb, Button, Layout, Menu, Space, theme} from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { Pages } from "@/constant";
+import {showAllMarker} from "@/components/Map/useMap";
+
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -90,14 +92,16 @@ export const MainLayout = ({ children, header }: LayoutProps): JSX.Element => {
           {header}
         </Header>
         <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
+          <Breadcrumb>
             <Breadcrumb.Item></Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
-              padding: 24,
-              minHeight: 360,
-              // background: colorBgContainer,
+              height: "100%",
+              marginTop: "5px",
+              padding: "5px",
+              borderRadius: "10px",
+              background: colorBgContainer,
               position: "relative",
             }}
           >

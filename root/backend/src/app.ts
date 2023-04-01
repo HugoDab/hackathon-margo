@@ -1,6 +1,12 @@
 import express from "express";
 import {logger} from "./utils/logger"
 import {router} from "./routes/router";
+import cors from "cors"
+
+// @ts-ignore
+import {inject, errorHandler} from 'express-custom-error';
+
+inject()
 
 const app: express.Application = express();
 
@@ -13,6 +19,7 @@ app.use(express.urlencoded({
 
 // Configure custom logger middleware
 app.use(logger.dev, logger.combined);
+app.use(cors())
 
 // This middleware adds the json header to every response
 app.use('*', (req, res, next) => {
@@ -22,6 +29,9 @@ app.use('*', (req, res, next) => {
 
 // Assign Routes
 app.use('/', router)
+
+// Handle error
+app.use(errorHandler())
 
 // Handle not valid route
 app.use('*', (req, res) => {

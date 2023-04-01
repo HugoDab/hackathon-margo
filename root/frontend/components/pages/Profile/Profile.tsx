@@ -1,4 +1,4 @@
-import { MainLayout } from 'components/MainLayout';
+import { MainLayout } from 'components/Button';
 import { useGetMe } from 'services/api/user/useUser';
 
 import { ProfileForm } from './ProfileForm';

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { MainLayout } from 'components/MainLayout';
+import { MainLayout } from 'components/Button';
 import { Map } from 'components/Map';
 import { useGetMe } from 'services/api/user/useUser';
 

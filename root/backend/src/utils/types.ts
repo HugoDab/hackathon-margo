@@ -2,6 +2,7 @@ export type DrinkingWater = {
     long: number;
     lat: number;
     osm_id: string;
+    name: string;
     operator: string;
     accepts_bottle: AcceptationType;
     indoor: AcceptationType;
@@ -18,11 +19,4 @@ export enum AcceptationType {
     yes,
     no,
     unknown
-}
-
-export enum RoutingProfile {
-    traffic = "mapbox/driving-traffic",
-    driving = "mapbox/driving",
-    walking = "mapbox/walking",
-    cycling = "mapbox/cycling"
 }
