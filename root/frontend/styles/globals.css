@@ -109,3 +109,7 @@ a {
 .mapboxgl-popup-content {
   color: black !important;
 }
+
+.title {
+  font-size: 32px;
+}

@@ -1,14 +1,13 @@
 import { PictureOutlined, UserOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import {Breadcrumb, Button, Layout, Menu, Space, theme} from "antd";
+import { Breadcrumb, Button, Layout, Menu, Space, theme } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { Pages } from "@/constant";
-import {showAllMarker} from "@/components/Map/useMap";
-
+import { showAllMarker } from "@/components/Map/useMap";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -46,7 +45,7 @@ type LayoutProps = {
 export const MainLayout = ({ children, header }: LayoutProps): JSX.Element => {
   const { asPath } = useRouter();
   const [selectedKeys, setSelectedKeys] = useState(["1"]);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -65,8 +64,8 @@ export const MainLayout = ({ children, header }: LayoutProps): JSX.Element => {
         collapsible
         collapsed={collapsed}
         trigger={null}
-        onMouseEnter={() => setCollapsed(false)}
-        onMouseLeave={() => setCollapsed(true)}
+        // onMouseEnter={() => setCollapsed(false)}
+        // onMouseLeave={() => setCollapsed(true)}
       >
         <div
           style={{
@@ -92,9 +91,6 @@ export const MainLayout = ({ children, header }: LayoutProps): JSX.Element => {
           {header}
         </Header>
         <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb>
-            <Breadcrumb.Item></Breadcrumb.Item>
-          </Breadcrumb>
           <div
             style={{
               height: "100%",
