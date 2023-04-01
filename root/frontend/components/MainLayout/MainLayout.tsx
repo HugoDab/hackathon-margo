@@ -44,7 +44,7 @@ type LayoutProps = {
 export const MainLayout = ({ children, header }: LayoutProps): JSX.Element => {
   const { asPath } = useRouter();
   const [selectedKeys, setSelectedKeys] = useState(["1"]);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -63,8 +63,8 @@ export const MainLayout = ({ children, header }: LayoutProps): JSX.Element => {
         collapsible
         collapsed={collapsed}
         trigger={null}
-        onMouseEnter={() => setCollapsed(false)}
-        onMouseLeave={() => setCollapsed(true)}
+        // onMouseEnter={() => setCollapsed(false)}
+        // onMouseLeave={() => setCollapsed(true)}
       >
         <div
           style={{
@@ -90,9 +90,6 @@ export const MainLayout = ({ children, header }: LayoutProps): JSX.Element => {
           {header}
         </Header>
         <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item></Breadcrumb.Item>
-          </Breadcrumb>
           <div
             style={{
               padding: 24,

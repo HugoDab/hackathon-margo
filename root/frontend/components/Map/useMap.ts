@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Map } from "mapbox-gl";
 import mapboxgl from "mapbox-gl";
+import { generateNewMarker } from "./utils";
 
 export const initMap = (
   container: HTMLDivElement,
@@ -11,7 +12,7 @@ export const initMap = (
     style: "mapbox://styles/mapbox/streets-v12",
     pitchWithRotate: false,
     center: coords,
-    zoom: 15,
+    zoom: 14,
     accessToken: process.env.NEXT_PUBLIC_MAPBOX_API_KEY as string,
     doubleClickZoom: false,
   });
@@ -28,6 +29,11 @@ export const useMap = (container: React.RefObject<HTMLDivElement>) => {
             position.coords.longitude,
             position.coords.latitude,
           ]);
+          generateNewMarker({
+            map: mapInitRef.current,
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
         },
         (error) => {
           console.error(error);

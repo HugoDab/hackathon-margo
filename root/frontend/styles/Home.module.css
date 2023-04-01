@@ -7,6 +7,11 @@
   min-height: 100vh;
 }
 
+.mapboxgl-popup-content {
+  color: black !important;
+  background-color: red;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;

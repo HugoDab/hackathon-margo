@@ -21,7 +21,7 @@ export const MapView = (): JSX.Element => {
       <div
         ref={mapRef}
         className="map"
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: "70vh", width: "85vw" }}
       />
     </div>
   );
